@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,7 +10,8 @@ const New = () => {
 
     const [user,setUser] = useState({
         name:"",
-        date:""
+        date:"",
+        image:""
     })
 
     const maxDate = new Date();
@@ -30,6 +31,8 @@ const New = () => {
             console.log(date)
             setValue(date)
             // setUser({ ...user, date: date });
+
+
             const editDate = date===null ? "": dateFormate(date)
             console.log(editDate,"edited")
             setUser({ ...user, date: editDate });
@@ -43,8 +46,9 @@ const New = () => {
         e.preventDefault()
         
        console.log(user)
-    }
+    } 
 
+  
      
   return (
     <div>
@@ -62,8 +66,21 @@ const New = () => {
             isClearable
             filterDate={date=>date.getDay()!==6 && date.getDay()!==0}
         />
-        <input type='submit' value='submit' />
+        <DatePicker 
+            name='date'
+            selected={value}
+            onChange={(date)=>changeDate(date)}
+            placeholderText='hh:mm'
+            dateFormat='hh:mm'
+            showTimeSelect
+            showIcon
+            isClearable
+        /><br/><br/>
+        
+        <input type='submit' value='submit' onChange={submitHandler} />
+        
         </form>
+       
     </div>
   )
 }
